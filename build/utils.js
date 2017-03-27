@@ -86,7 +86,7 @@ exports.scanEntryFile = function () {
     }
     program
         .version('0.0.1')
-        .option('-p, --project <p>', 'compile project')
+        .option('-p, --project <name>', 'compile project')
         .parse(argv);
     entryList = program.project
         ? [program.project]
