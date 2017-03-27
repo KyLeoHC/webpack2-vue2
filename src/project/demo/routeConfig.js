@@ -9,7 +9,7 @@ const routeConfig = {
             component: resolve => {
                 require.ensure(['./views/list/index.vue'], () => {
                     resolve(require('./views/list/index.vue'))
-                }, 'demo-list')
+                }, 'chunk/demo-list')
             }
         },
         {
@@ -18,7 +18,7 @@ const routeConfig = {
             component: resolve => {
                 require.ensure(['./views/detail/index.vue'], () => {
                     resolve(require('./views/detail/index.vue'))
-                }, 'demo-detail')
+                }, 'chunk/demo-detail')
             }
         }
     ]
