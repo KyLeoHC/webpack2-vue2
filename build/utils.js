@@ -2,6 +2,7 @@ var path = require('path')
 var glob = require('glob')
 var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var program = require('commander')
 
 exports.assetsPath = function (_path) {
     // var assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -76,9 +77,22 @@ exports.styleLoaders = function (options) {
  * @returns {{}}
  */
 exports.scanEntryFile = function () {
-    var entryList = glob.sync('./src/project/*').map(function (src) {
-        return path.basename(src);
-    }), entry = {};
+    var argv, entryList, entry = {};
+    try {
+        //get parameter from npm command
+        argv = JSON.parse(process.env.npm_config_argv).original;
+    } catch (ex) {
+        argv = process.argv;
+    }
+    program
+        .version('0.0.1')
+        .option('-p, --project <p>', 'compile project')
+        .parse(argv);
+    entryList = program.project
+        ? [program.project]
+        : glob.sync('./src/project/*').map(function (src) {
+            return path.basename(src);
+        });
     entryList.forEach(function (name) {
         entry[name] = './src/project/' + name + '/main.js';
     });
