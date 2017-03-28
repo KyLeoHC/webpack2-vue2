@@ -1,6 +1,6 @@
 # webpack2-vue2
 
-> A Vue.js demo project(modify from Vue official CLI).
+> A Vue.js demo project(Support multiple page development).
 
 ## Build Setup
 
