@@ -1,6 +1,3 @@
-// import List from './views/list'
-// import Detail from './views/detail'
-
 const routeConfig = {
     routes: [
         {
@@ -22,6 +19,6 @@ const routeConfig = {
             }
         }
     ]
-};
+}
 
 export default routeConfig

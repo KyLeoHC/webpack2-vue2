@@ -9,8 +9,7 @@
         <c3/>
         <c4/>
         <c5/>
-        123
-
+        <p>123</p>
     </div>
 </template>
 <script>
