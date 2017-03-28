@@ -21,8 +21,10 @@
         }
     }
 </script>
-<style>
+<style lang="less" scoped>
+    @fontColor: #7ae368;
+
     .detail {
-        color: #090909;
+        color: @fontColor;
     }
 </style>

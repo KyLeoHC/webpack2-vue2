@@ -10,6 +10,7 @@
         <c4/>
         <c5/>
         123
+
     </div>
 </template>
 <script>
@@ -38,8 +39,7 @@
         }
     }
 </script>
-<style>
-    .first {
-        color: #fff;
-    }
+<style lang="stylus" scoped>
+    .first
+        color: #ff8986
 </style>
