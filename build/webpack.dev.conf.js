@@ -9,20 +9,20 @@ var InlineResourcePlugin = require('inline-resource-plugin')
 
 var entryList = utils.scanEntryFile()
 var webpackConfig = merge(baseWebpackConfig, {
-  module: {
-    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
-  },
-  // cheap-module-eval-source-map is faster for development
-  devtool: '#cheap-module-eval-source-map',
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': config.dev.env
-    }),
-    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new FriendlyErrorsPlugin()
-  ]
+    module: {
+        rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
+    },
+    // cheap-module-eval-source-map is faster for development
+    devtool: '#cheap-module-eval-source-map',
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': config.dev.env
+        }),
+        // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new FriendlyErrorsPlugin()
+    ]
 })
 
 // add hot-reload related code to entry chunks
@@ -31,25 +31,25 @@ var webpackConfig = merge(baseWebpackConfig, {
 // })
 webpackConfig.entry = entryList;
 Object.keys(entryList).forEach(function (name) {
-  // add hot-reload related code to entry chunks
-  webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name]);
-  webpackConfig.plugins.push(
-    new HtmlWebpackPlugin({
-      filename: name + '/index.html',
-      template: './src/project/' + name + '/index.html',
-      inject: true,
-      chunks: [name]
-    })
-  );
-  webpackConfig.plugins.push(
-    new InlineResourcePlugin({
-      compile: true,
-      compress: false,
-      rootpath: './src',
-      template: './src/project/' + name + '/index.html',
-      test: new RegExp('^' + name + '/index\\.html$')
-    })
-  );
+    // add hot-reload related code to entry chunks
+    webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name]);
+    webpackConfig.plugins.push(
+        new HtmlWebpackPlugin({
+            filename: name + '/index.html',
+            template: './src/project/' + name + '/index.html',
+            inject: true,
+            chunks: [name]
+        })
+    );
+    webpackConfig.plugins.push(
+        new InlineResourcePlugin({
+            compile: true,
+            compress: false,
+            rootpath: './src',
+            template: './src/project/' + name + '/index.html',
+            test: new RegExp('^' + name + '/index\\.html$')
+        })
+    );
 });
 
 module.exports = webpackConfig;
