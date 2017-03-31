@@ -19,10 +19,11 @@ module.exports = {
     rules: {
         'indent': ['error', 4],
         'space-before-function-paren': ["error", {
-            "anonymous": "never",
+            "anonymous": "always",
             "named": "never",
             "asyncArrow": "ignore"
         }],
+        'semi': ['error', 'always'],
         // allow paren-less arrow functions
         'arrow-parens': 0,
         // allow async-await

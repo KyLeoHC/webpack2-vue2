@@ -1,44 +1,47 @@
 <template>
     <div>
-        <span class="first">I am the first view!</span>
-        <br/>
-        <span>{{time | dateFormat('yyyy-MM-dd hh:mm:ss')}}</span>
-        <br/>
-        <c1/>
-        <c2/>
-        <c3/>
-        <c4/>
-        <c5/>
-        <p>123</p>
+        <div class="first">I am the list view!</div>
+        <div>{{time | dateFormat('yyyy-MM-dd hh:mm:ss')}}</div>
+        <ul>
+            <li v-for="item in list">{{item.name}}/{{item.price}}</li>
+        </ul>
     </div>
 </template>
 <script>
-    import dateFormat from 'src/filters/dateFormat.js'
-    import c1 from '../../components/children1.vue'
-    import c2 from '../../components/children2.vue'
-    import c3 from '../../components/children3.vue'
-    import c4 from '../../components/children4.vue'
-    import c5 from '../../components/children5.vue'
+    import dateFormat from 'src/filters/dateFormat';
+    import {fetchGoodsData} from 'project/demo/service/goods';
 
     export default {
         data() {
             return {
-                time: new Date().getTime()
-            }
+                time: new Date().getTime(),
+                list: []
+            };
         },
         filters: {
             dateFormat
         },
-        components: {
-            c1,
-            c2,
-            c3,
-            c4,
-            c5
+        created() {
+            this.init();
+        },
+        watch: {
+            '$route': 'init'
+        },
+        methods: {
+            init() {
+                fetchGoodsData((list) => {
+                    this.list = list;
+                }).then(() => {
+                    console.log('===');
+                });
+            }
         }
-    }
+    };
 </script>
 <style lang="stylus" scoped>
     .first
         color: #ff8986
+
+    ul
+        list-style: none
 </style>

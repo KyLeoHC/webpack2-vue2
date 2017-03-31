@@ -5,8 +5,8 @@ const routeConfig = {
             name: 'list',
             component: resolve => {
                 require.ensure(['./views/list/index.vue'], () => {
-                    resolve(require('./views/list/index.vue'))
-                }, 'chunk/demo-list')
+                    resolve(require('./views/list/index.vue'));
+                }, 'chunk/demo-list');
             }
         },
         {
@@ -14,11 +14,11 @@ const routeConfig = {
             name: 'detail',
             component: resolve => {
                 require.ensure(['./views/detail/index.vue'], () => {
-                    resolve(require('./views/detail/index.vue'))
-                }, 'chunk/demo-detail')
+                    resolve(require('./views/detail/index.vue'));
+                }, 'chunk/demo-detail');
             }
         }
     ]
-}
+};
 
-export default routeConfig
+export default routeConfig;

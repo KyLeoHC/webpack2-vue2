@@ -6,20 +6,20 @@
         data() {
             return {
                 msg: ''
-            }
+            };
         },
         created() {
-            this.init()
+            this.init();
         },
         watch: {
             '$route': 'init'
         },
         methods: {
             init() {
-                this.msg = this.$route.query.msg
+                this.msg = this.$route.query.msg;
             }
         }
-    }
+    };
 </script>
 <style lang="less" scoped>
     @fontColor: #7ae368;
