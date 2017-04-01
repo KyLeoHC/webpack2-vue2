@@ -32,7 +32,7 @@
                 fetchGoodsData((list) => {
                     this.list = list;
                 }).then(() => {
-                    console.log('===');
+                    console.log('处理数据完成');
                 });
             }
         }

@@ -1,14 +1,7 @@
-import host from '@/common/host';
-import axios from 'axios';
-
-let axiosInstance = axios.create({
-    baseURL: host,
-    timeout: 10000,
-    headers: {'X-Custom-Header': 'foobar'}
-});
+import http from '@/common/http';
 
 const fetchGoodsData = (callback) => {
-    return axiosInstance
+    return http
         .post('goods', {
             gid: 20170331
         })

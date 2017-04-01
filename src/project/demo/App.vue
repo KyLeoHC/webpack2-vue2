@@ -11,9 +11,11 @@
 </template>
 <script>
     import Hello from './components/Hello';
+    import store from './store';
 
     export default {
         name: 'app',
+        store,
         components: {
             Hello
         }
