@@ -22,7 +22,8 @@ module.exports = {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
             'src': path.resolve(__dirname, '../src'),
-            'project': path.resolve(__dirname, '../src/project')
+            'project': path.resolve(__dirname, '../src/project'),
+            'tpc': path.resolve(__dirname, '../src/thirdPartyComponents')
         }
     },
     module: {

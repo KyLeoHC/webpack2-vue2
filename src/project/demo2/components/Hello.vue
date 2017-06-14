@@ -24,13 +24,5 @@
         }
     };
 </script>
-<style lang="scss" scoped>
-    $fontSize: 36px;
-    .hello {
-        border: 1px solid #000;
-
-        article {
-            font-size: $fontSize;
-        }
-    }
+<style scoped>
 </style>
