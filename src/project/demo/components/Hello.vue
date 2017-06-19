@@ -2,6 +2,7 @@
     <div class="hello">
         <h1>{{ msg }}</h1>
         <div>Demo1 work with vue-router</div>
+        <slot></slot>
     </div>
 </template>
 
