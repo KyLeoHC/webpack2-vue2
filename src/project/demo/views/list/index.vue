@@ -16,7 +16,7 @@
 </template>
 <script>
     import dateFormat from 'src/filters/dateFormat';
-    import infiniteScrollList from 'src/components/infiniteScrollList';
+    import infiniteScrollList from 'vue-scroll-list';
 
     export default {
         data() {
