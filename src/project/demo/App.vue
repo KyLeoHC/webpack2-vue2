@@ -1,14 +1,14 @@
 <template>
     <div id="app">
-        <span class="logo"></span>
-        <hello>
-            <div>this is slot content</div>
-        </hello>
+        <!--<span class="logo"></span>-->
+        <!--<hello>-->
+        <!--<div>this is slot content</div>-->
+        <!--</hello>-->
         <div>
             <router-link :to="{ name: 'list'}">to List</router-link>
             <router-link :to="{ name: 'detail', query: { msg: 'List to Detail' }}">to Detail</router-link>
         </div>
-        <component :is="currentView"></component>
+        <!--<component :is="currentView"></component>-->
         <router-view></router-view>
     </div>
 </template>

@@ -3,20 +3,31 @@
         <div class="first">I am the list view!</div>
         <div>{{time | dateFormat('yyyy-MM-dd hh:mm:ss')}}</div>
         <ul>
-            <li v-for="item in list">{{item.name}}/{{item.price}}</li>
+            <infinite-scroll-list
+                :size-list="heightList"
+                :remain="10"
+                :view-height="400">
+                <li v-for="(item, index) in list"
+                    :key="item.name"
+                    :style="{height: item.itemHeight + 'px'}">{{item.name}}/{{item.price}}/{{item.itemHeight}}</li>
+            </infinite-scroll-list>
         </ul>
     </div>
 </template>
 <script>
     import dateFormat from 'src/filters/dateFormat';
-    import {fetchGoodsData} from 'project/demo/service/goods';
+    import infiniteScrollList from 'src/components/infiniteScrollList';
 
     export default {
         data() {
             return {
                 time: new Date().getTime(),
-                list: []
+                list: [],
+                heightList: []
             };
+        },
+        components: {
+            infiniteScrollList
         },
         filters: {
             dateFormat
@@ -29,11 +40,15 @@
         },
         methods: {
             init() {
-                fetchGoodsData((list) => {
-                    this.list = list;
-                }).then(() => {
-                    console.log('处理数据完成');
-                });
+                for (let i = 0; i < 40; i++) {
+                    let itemHeight = Math.random() > 0.5 ? 40 : 100;
+                    this.list.push({
+                        name: 'name-' + i,
+                        price: Math.floor(Math.random() * 1000),
+                        itemHeight: itemHeight
+                    });
+                    this.heightList.push(itemHeight);
+                }
             }
         }
     };
@@ -43,5 +58,10 @@
         color: #ff8986
 
     ul
+        border 1px solid #000
         list-style: none
+        li
+            border-bottom 1px solid #008800
+            &:last-child
+                border-bottom 0
 </style>
