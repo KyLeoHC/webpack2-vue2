@@ -4,12 +4,16 @@
         <div>{{time | dateFormat('yyyy-MM-dd hh:mm:ss')}}</div>
         <ul>
             <infinite-scroll-list
-                :size-list="heightList"
+                :heights="heightList"
                 :remain="10"
-                :view-height="400">
+                @toTop="onTop"
+                @toBottom="onBottom"
+                @scrolling="onScroll">
                 <li v-for="(item, index) in list"
                     :key="item.name"
-                    :style="{height: item.itemHeight + 'px'}">{{item.name}}/{{item.price}}/{{item.itemHeight}}</li>
+                    :style="{height: item.itemHeight + 'px'}">
+                    {{item.name}}/{{item.price}}/{{item.itemHeight}}
+                </li>
             </infinite-scroll-list>
         </ul>
     </div>
@@ -39,6 +43,15 @@
             '$route': 'init'
         },
         methods: {
+            onTop() {
+                console.log('page to top.');
+            },
+            onBottom() {
+                console.log('page to bottom.');
+            },
+            onScroll(event) {
+                console.log(event);
+            },
             init() {
                 for (let i = 0; i < 40; i++) {
                     let itemHeight = Math.random() > 0.5 ? 40 : 100;
@@ -59,7 +72,8 @@
 
     ul
         border 1px solid #000
-        list-style: none
+        list-style none
+        height 600px
         li
             border-bottom 1px solid #008800
             &:last-child
