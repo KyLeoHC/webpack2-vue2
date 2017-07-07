@@ -111,9 +111,10 @@ Object.keys(entryList).forEach(function (name) {
     // see https://github.com/ampedandwired/html-webpack-plugin
     webpackConfig.plugins.push(
         new HtmlWebpackPlugin({
-            filename: process.env.NODE_ENV === 'testing'
-                ? 'index.html'
-                : (name + '/index.html'),
+            filename: name + '/index.html',
+            // filename: process.env.NODE_ENV === 'testing'
+            //     ? 'index.html'
+            //     : (name + '/index.html'),
             template: './src/project/' + name + '/index.html',
             inject: true,
             minify: {
