@@ -70,6 +70,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             name: 'manifest',
             chunks: ['vendor']
         }),
+        new webpack.HashedModuleIdsPlugin(),
         // copy custom static assets
         new CopyWebpackPlugin([
             {
