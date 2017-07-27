@@ -80,7 +80,7 @@ class Event {
         // 传递给事件处理函数的第一个参数为事件对象
         // 该对象拥有一些可能会有用的属性和函数（比如可以终止处理函数链的执行exit）
         args = args.concat([{
-            name: name,     // 事件名
+            name: name, // 事件名
             length: length, // 事件处理函数的数量
             /**
              * 阻止继续执行函数处理链并退出
