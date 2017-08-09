@@ -4,7 +4,16 @@
     </div>
 </template>
 <script>
-    export default {};
+    import registerTpc from '../register';
+
+    const business2 = {
+        ready() {
+        }
+    };
+
+    registerTpc('business2', business2);
+
+    export default business2;
 </script>
 <style lang="stylus" scoped>
     .tpc-business2

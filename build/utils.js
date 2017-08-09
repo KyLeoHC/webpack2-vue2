@@ -1,3 +1,4 @@
+var fs = require('fs')
 var path = require('path')
 var glob = require('glob')
 var config = require('../config')
@@ -79,7 +80,7 @@ exports.styleLoaders = function (options) {
 exports.scanEntryFile = function () {
     var argv, entryList, entry = {};
     try {
-        //get parameter from npm command
+        // get parameter from npm command
         argv = JSON.parse(process.env.npm_config_argv).original;
     } catch (ex) {
         argv = process.argv;
@@ -97,4 +98,36 @@ exports.scanEntryFile = function () {
         entry[name] = './src/project/' + name + '/main.js';
     });
     return entry;
-}
+};
+
+/**
+ * scan the `TPC` entry JS file
+ * @returns {{}}
+ */
+exports.scanTPCEntryFile = function () {
+    var argv, entryList, entry = {};
+    try {
+        // get parameter from npm command
+        argv = JSON.parse(process.env.npm_config_argv).original;
+    } catch (ex) {
+        argv = process.argv;
+    }
+    program
+        .version('0.0.1')
+        .option('-cp, --component <name>', 'compile tpc')
+        .parse(argv);
+    entryList = program.component
+        ? [program.component]
+        : glob.sync('./src/thirdPartyComponents/*!(.js)').map(function (src) {
+
+            return fs.statSync(src).isDirectory() ? path.basename(src) : '';
+        });
+    entryList.forEach(function (name) {
+        if (name) {
+            entry[name] = './src/thirdPartyComponents/' + name + '/index.js';
+        }
+    });
+    return entry;
+};
+
+

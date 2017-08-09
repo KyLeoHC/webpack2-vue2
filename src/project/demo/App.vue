@@ -5,34 +5,46 @@
             <router-link :to="{ name: 'detail', query: { msg: 'List to Detail' }}">to Detail</router-link>
         </div>
         <router-view></router-view>
+        <component :is="b1"></component>
+        <component :is="b2"></component>
     </div>
 </template>
 <script>
     import store from './store';
-    import {modules as tpc} from 'tpc';
+    import tpcInitiator from 'tpc/init';
+    import loadComponent from 'tpc/loader';
+    import Vue from 'vue';
 
+    tpcInitiator();
     export default {
         name: 'app',
         data() {
             return {
+                b1: '',
+                b2: '',
                 currentView: 'business1App'
             };
         },
         store,
-        components: {
-            ...tpc
-        },
+        components: {},
         methods: {
             exportInterface() {
                 // 对外部第三方组件暴露接口
                 let event = window.tpcEvent;
                 event.on('tpc_switchView', data => {
+                    console.log('tpc_switchView', data);
                     this.currentView = data.view || 'business1App';
                 });
             }
         },
         mounted() {
             this.exportInterface();
+            loadComponent(['business1', 'business2'], (list) => {
+                Vue.component('business1', list[0]);
+                Vue.component('business2', list[1]);
+                this.b1 = 'business1';
+                this.b2 = 'business2';
+            });
         }
     };
 </script>
