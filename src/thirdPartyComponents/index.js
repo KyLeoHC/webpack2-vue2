@@ -1,8 +1,8 @@
-import init from './init';
-import * as business1 from './business1';
-import * as business2 from './business2';
-
-init();
+/**
+ *
+ */
+import * as business1 from './components/business1';
+import * as business2 from './components/business2';
 
 const modules = {
     ...business1,

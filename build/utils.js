@@ -118,13 +118,13 @@ exports.scanTPCEntryFile = function () {
         .parse(argv);
     entryList = program.component
         ? [program.component]
-        : glob.sync('./src/thirdPartyComponents/*!(.js)').map(function (src) {
+        : glob.sync('./src/thirdPartyComponents/components/*!(.js)').map(function (src) {
 
             return fs.statSync(src).isDirectory() ? path.basename(src) : '';
         });
     entryList.forEach(function (name) {
         if (name) {
-            entry[name] = './src/thirdPartyComponents/' + name + '/index.js';
+            entry[name] = './src/thirdPartyComponents/components/' + name + '/index.js';
         }
     });
     return entry;

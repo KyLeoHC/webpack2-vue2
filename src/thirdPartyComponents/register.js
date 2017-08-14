@@ -6,7 +6,7 @@
 const registerTpc = (name, component) => {
     window.tpcObj = window.tpcObj || {};
     if (window.tpcObj[name]) {
-        console.error(`'${name}'组件名字已经被占用!`);
+        console.error(`'${name}'组件名字已经被占用!`, component);
     } else {
         window.tpcObj[name] = component;
     }

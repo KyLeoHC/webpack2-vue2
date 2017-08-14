@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-    import registerTpc from '../register';
+    import registerTpc from '../../register';
 
     const business1 = {
         methods: {

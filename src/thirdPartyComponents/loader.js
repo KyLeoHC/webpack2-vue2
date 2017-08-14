@@ -15,11 +15,13 @@ let tpcVersion = storage.local.get(TPC_VERSION_KEY, true);
  * @private
  */
 const _debugger = {
-    error(msg) {
-        console.error(`[TPC Loader]:${msg}`);
+    error(msg, ...args) {
+        args = args.length ? args : '';
+        console.error(`[TPC Loader]:${msg}`, args);
     },
-    info(msg) {
-        console.log(`%c[TPC Loader]`, 'color:green', msg);
+    info(msg, ...args) {
+        args = args.length ? args : '';
+        console.log(`%c[TPC Loader]`, 'color:green', msg, args);
     }
 };
 
@@ -41,11 +43,11 @@ const loadByJsonp = (url, enableCache = false) => {
 };
 
 /**
- * 加载组件
+ * 加载组件（生产环境）
  * @param dependencies 依赖数组
  * @param cb 加载完成时的回调
  */
-const loadComponent = (dependencies, cb) => {
+const loadComponentInProduction = (dependencies, cb) => {
     if (dependencies && !dependencies.length) {
         _debugger.error('dependencies参数不能为空.');
         return;
@@ -98,5 +100,28 @@ const loadComponent = (dependencies, cb) => {
 
     loadByJsonp(TPC_VERSION_URL, false);
 };
+
+/**
+ * 加载组件（开发环境）
+ * @param dependencies 依赖数组
+ * @param cb 加载完成时的回调
+ */
+const loadComponentInDevelopment = (dependencies, cb) => {
+    _debugger.info('开始加载模块');
+    /* eslint-disable */
+    if (module.hot) {
+        import('./index.js')
+            .then(() => {
+                cb && cb(dependencies.map(dep => {
+                    return window.tpcObj[dep];
+                }));
+                _debugger.info('加载模块完成');
+                _debugger.info('挂载模块', window.tpcObj);
+            });
+    }
+};
+
+const loadComponent = process.env.NODE_ENV === 'development' ? loadComponentInDevelopment
+    : loadComponentInProduction;
 
 export default loadComponent;
